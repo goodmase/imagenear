@@ -1,0 +1,1 @@
+HANEKE_OTHER_LDFLAGS = -framework "ImageIO"
