@@ -19,7 +19,7 @@
 -(void)setPhotoID:(NSInteger)photoID
 {
     _photoID = photoID;
-    _largePhotoFileURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%i.jpg", kLargePhotoBaseURL, photoID]];
+    _largePhotoFileURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%li.jpg", kLargePhotoBaseURL, (long)photoID]];
     
 }
 
