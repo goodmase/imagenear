@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "WebServiceModel.h"
+#import "IMAWebServiceModel.h"
 #import "CollectionViewCell.h"
 #import "ImageViewController.h"
 #import "IMAPhotoObject.h"
@@ -15,7 +15,6 @@
 
 @interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong) NSArray *photoList;
 @property (weak, nonatomic) IBOutlet UICollectionView *photoCollectionView;
 @property (nonatomic, strong) UIImageView *imageView;
 
@@ -27,7 +26,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.photoList = [NSMutableArray new];
     self.imageView = [UIImageView new];
     [self downloadTheData];
 
@@ -51,8 +49,7 @@
                                               IMAPhotoModel *photoModel = [IMAPhotoModel sharedInstance];
                                               [photoModel parseJSONDict:dataDict];
                                               
-                                              
-                                              self.photoList = dataDict[@"photos"];
+                                            
   
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   [self.photoCollectionView reloadData];
@@ -80,14 +77,9 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ImageViewController *imageViewController = [sb instantiateViewControllerWithIdentifier:@"ImageViewController"];
     
-    NSDictionary *aDict = [self.photoList objectAtIndex:indexPath.row];
-    NSString *photo_id = aDict[@"photo_id"];
+    IMAPhotoObject *photoObj = [IMAPhotoModel sharedInstance].photoObjectList[indexPath.row];
     
-    NSURL *photoUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://static.panoramio.com/photos/large/%@.jpg", photo_id]];
-    
-    imageViewController.fullScreenURL = photoUrl;
-    
-    
+    imageViewController.fullScreenURL = photoObj.largePhotoFileURL;
     [self.navigationController showViewController:imageViewController sender:self];
     
     
@@ -115,17 +107,15 @@
 {
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
     
-    NSDictionary *aDict = [self.photoList objectAtIndex:indexPath.row];
-    NSURL *photoUrl = [NSURL URLWithString:aDict[@"photo_file_url"]];
-    
-    [cell setImageUrl:photoUrl];
+    IMAPhotoObject *photoObj = [IMAPhotoModel sharedInstance].photoObjectList[indexPath.row];
+    [cell setImageUrl:photoObj.photoFileURL];
     
     return cell;
     
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.photoList count];
+    return [[IMAPhotoModel sharedInstance].photoObjectList count];
 }
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
