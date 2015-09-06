@@ -9,6 +9,7 @@
 #import "IMAWebServiceModel.h"
 #import "IMAConstants.h"
 #import "IMAPhotoModel.h"
+#import "IMACordHelper.h"
 
 @interface IMAWebServiceModel()
 
@@ -17,6 +18,7 @@
 @property (nonatomic, copy) NSString *nextPageString;
 @property (nonatomic, strong) IMAPhotoModel *photoModel;
 @property (nonatomic, assign) NSUInteger photoStartNum;
+@property (nonatomic, assign, readwrite) double searchSizeKM;
 
 @end
 
@@ -27,6 +29,7 @@
     if (self) {
         _photoModel = [IMAPhotoModel new];
         _photoStepSize = 20;
+        _searchSizeKM = 5.0;
     }
     return self;
 }
@@ -40,23 +43,37 @@
     });
     return shared;
 }
-
+-(void)setNewLon:(double)lon andLat:(double)lat
+{
+    self.photoModel.isOutOfPhotos = NO;
+    self.photoModel.mapLocation = [[IMAMapObject alloc] initWithLon:lon andLat:lat];
+}
+-(void)expandSearchAreaTo:(double)sizeInKm{
+    self.searchSizeKM = sizeInKm;
+    self.photoModel.isOutOfPhotos = NO;
+}
 -(NSString *)generateURLString
 {
-    NSString *mapLocationString = [self genLocPartURLStringWithMapObject:self.photoModel.mapLocation andSize:2.0];
+    
+    NSString *mapLocationString = [self genLocPartURLStringWithMapObject:self.photoModel.mapLocation andSize:_searchSizeKM];
     
     NSString *photoRangeString = [NSString stringWithFormat:@"&from=%lu&to=%lu", (unsigned long)self.photoStartNum, self.photoStartNum+self.photoStepSize];
     
     return [NSString stringWithFormat:@"%@get_panoramas.php?set=public%@%@&size=small&mapfilter=true", WebServiceBaseURL, photoRangeString, mapLocationString];
 }
+//size in km
 -(NSString *)genLocPartURLStringWithMapObject:(IMAMapObject *)mapObj andSize:(double)size
 {
-    double minx, maxx, miny, maxy;
-    minx = mapObj.longitude - size/2;
-    maxx = mapObj.longitude + size/2;
+    double lon_size = [IMACordHelper lonFromKm:size atLat:mapObj.latitude];
+    double lat_size = [IMACordHelper latFromKm:size];
     
-    miny = mapObj.latitude - size/2;
-    maxy = mapObj.latitude + size/2;
+    
+    double minx, maxx, miny, maxy;
+    minx = mapObj.longitude - lon_size/2;
+    maxx = mapObj.longitude + lon_size/2;
+    
+    miny = mapObj.latitude - lat_size/2;
+    maxy = mapObj.latitude + lat_size/2;
     
     return [NSString stringWithFormat:@"&minx=%.6f&miny=%.6f&maxx=%.6f&maxy=%.6f", minx, miny, maxx, maxy];
 }
@@ -64,12 +81,13 @@
 //makes it so you can load the first page again.
 -(void)clearPhotos
 {
-    self.nextPageString = nil;
     self.isOutOfPhotos = NO;
 }
 
 -(void)fetchMorePhotos
 {
+    
+    
     if (self.isRefreshing || self.photoModel.isOutOfPhotos) {
         return;
         
@@ -96,8 +114,9 @@
                 
                 self.photoStartNum += [photoObjects count];
                 
-                [self.delegate photoObjectsFetchedByWebservice:photoObjects];
                 self.isRefreshing = NO;
+                [self.delegate photoObjectsFetchedByWebservice:photoObjects];
+                
                 
                 
                 

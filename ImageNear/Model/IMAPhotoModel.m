@@ -16,7 +16,7 @@
     self = [super init];
     
     if (self) {
-        _mapLocation = [[IMAMapObject alloc] initWithLon:-86.0 andLat:36.149];
+        _mapLocation = [[IMAMapObject alloc] initWithLon:-122.009167 andLat:37.335556];
         
     }
     return self;

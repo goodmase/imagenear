@@ -15,10 +15,13 @@
 @interface IMAWebServiceModel : NSObject
 
 +(IMAWebServiceModel*)sharedInstance;
+-(void)setNewLon:(double)lon andLat:(double)lat;
 -(void)fetchMorePhotos;
 -(void)clearPhotos;
+-(void)expandSearchAreaTo:(double)sizeInKm;
 
 @property (nonatomic, assign) id<IMAWebServiceDelegate> delegate;
 @property (nonatomic, assign) NSUInteger photoStepSize;
+@property (nonatomic, assign, readonly) double searchSizeKM;
 
 @end
