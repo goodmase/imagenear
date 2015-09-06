@@ -12,6 +12,9 @@
 #import "ImageViewController.h"
 #import "IMAPhotoObject.h"
 #import "IMAPhotoModel.h"
+#import "IMAMapObject.h"
+#import "IMAConstants.h"
+
 #import <CoreLocation/CoreLocation.h>
 
 @interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, IMAWebServiceDelegate, CLLocationManagerDelegate>
@@ -20,6 +23,7 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) NSMutableArray *photoObjectList;
 @property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, assign) NSUInteger updateAttempts;
 
 @end
 
@@ -31,7 +35,11 @@
     self.photoObjectList = [NSMutableArray new];
     self.imageView = [UIImageView new];
     [IMAWebServiceModel sharedInstance].delegate = self;
+    self.updateAttempts = 1;
     [self downloadTheData];
+    
+
+    
     
     
 
@@ -137,7 +145,8 @@
 {
     if ([photos count] == 0) {
         double currentSearchArea = [IMAWebServiceModel sharedInstance].searchSizeKM;
-        currentSearchArea *= 2.0;
+        currentSearchArea += SearchAreaAccelerationDefault * (self.updateAttempts*self.updateAttempts);
+        self.updateAttempts += 1;
         [[IMAWebServiceModel sharedInstance] expandSearchAreaTo:currentSearchArea];
         [[IMAWebServiceModel sharedInstance] fetchMorePhotos];
         NSLog(@"The search are is now %.2f", currentSearchArea);
@@ -157,6 +166,8 @@
     double lon = newLocation.coordinate.longitude;
     
     [[IMAWebServiceModel sharedInstance] setNewLon:lon andLat:lat];
+    [[IMAWebServiceModel sharedInstance] resetSearchSize];
+    self.updateAttempts = 1;
     [self.photoObjectList removeAllObjects];
     [[IMAWebServiceModel sharedInstance] fetchMorePhotos];
     
