@@ -18,6 +18,7 @@
 -(void)setNewLon:(double)lon andLat:(double)lat;
 -(void)fetchMorePhotos;
 -(void)clearPhotos;
+-(void)resetSearchSize;
 -(void)expandSearchAreaTo:(double)sizeInKm;
 
 @property (nonatomic, assign) id<IMAWebServiceDelegate> delegate;

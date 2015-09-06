@@ -18,6 +18,7 @@
 @property (nonatomic, copy) NSString *nextPageString;
 @property (nonatomic, strong) IMAPhotoModel *photoModel;
 @property (nonatomic, assign) NSUInteger photoStartNum;
+@property (nonatomic, strong) NSDictionary *coolPlaces;
 @property (nonatomic, assign, readwrite) double searchSizeKM;
 
 @end
@@ -29,9 +30,26 @@
     if (self) {
         _photoModel = [IMAPhotoModel new];
         _photoStepSize = 20;
-        _searchSizeKM = 5.0;
+        _searchSizeKM = SearchAreaDefault;
+        _coolPlaces = [self coolPlacesDict];
     }
     return self;
+}
+-(NSDictionary *)coolPlacesDict
+{
+    IMAMapObject *mapObjFiji = [[IMAMapObject alloc] initWithLon:177.958536 andLat:-17.907888];
+    IMAMapObject *mapObjChristchurchNZ = [[IMAMapObject alloc] initWithLon:172.636225 andLat:-43.532054];
+    IMAMapObject *mapObjTanglerMorocco = [[IMAMapObject alloc] initWithLon:-5.796385 andLat:35.736544];
+    IMAMapObject *mapObjHawaii = [[IMAMapObject alloc] initWithLon:-155.468628 andLat:19.568469];
+    
+    return @{@"Fiji":mapObjFiji,
+             @"Christchurch, New Zealand":mapObjChristchurchNZ,
+             @"Tangler, Morocco":mapObjTanglerMorocco,
+             @"Hawaii": mapObjHawaii};
+}
+-(void)resetSearchSize
+{
+    self.searchSizeKM = SearchAreaDefault;
 }
 
 + (IMAWebServiceModel*)sharedInstance
@@ -55,28 +73,37 @@
 -(NSString *)generateURLString
 {
     
-    NSString *mapLocationString = [self genLocPartURLStringWithMapObject:self.photoModel.mapLocation andSize:_searchSizeKM];
+    NSString *mapLocationString = [self genLocPartURLStringWithMapObject:self.photoModel.mapLocation andSize:_searchSizeKM isAntipod:YES];
     
     NSString *photoRangeString = [NSString stringWithFormat:@"&from=%lu&to=%lu", (unsigned long)self.photoStartNum, self.photoStartNum+self.photoStepSize];
     
     return [NSString stringWithFormat:@"%@get_panoramas.php?set=public%@%@&size=small&mapfilter=true", WebServiceBaseURL, photoRangeString, mapLocationString];
 }
 //size in km
--(NSString *)genLocPartURLStringWithMapObject:(IMAMapObject *)mapObj andSize:(double)size
+-(NSString *)genLocPartURLStringWithMapObject:(IMAMapObject *)mapObj andSize:(double)size isAntipod:(BOOL)antipod
 {
-    double lon_size = [IMACordHelper lonFromKm:size atLat:mapObj.latitude];
+    double lon, lat;
+    if (antipod) {
+        lon = mapObj.antipodeLongitude;
+        lat = mapObj.antipodeLatitude;
+    } else{
+        lon = mapObj.longitude;
+        lat = mapObj.latitude;
+    }
+    double lon_size = [IMACordHelper lonFromKm:size atLat:lat];
     double lat_size = [IMACordHelper latFromKm:size];
     
     
     double minx, maxx, miny, maxy;
-    minx = mapObj.longitude - lon_size/2;
-    maxx = mapObj.longitude + lon_size/2;
+    minx = lon - lon_size/2;
+    maxx = lon + lon_size/2;
     
-    miny = mapObj.latitude - lat_size/2;
-    maxy = mapObj.latitude + lat_size/2;
+    miny = lat - lat_size/2;
+    maxy = lat + lat_size/2;
     
     return [NSString stringWithFormat:@"&minx=%.6f&miny=%.6f&maxx=%.6f&maxy=%.6f", minx, miny, maxx, maxy];
 }
+
 
 //makes it so you can load the first page again.
 -(void)clearPhotos
