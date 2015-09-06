@@ -8,9 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol IMAWebServiceDelegate <NSObject>
+- (void)photoObjectsFetchedByWebservice:(NSArray *)photos;
+@end
+
 @interface IMAWebServiceModel : NSObject
 
--(void)downloadJSONFromUrl:(NSURL *)url;
++(IMAWebServiceModel*)sharedInstance;
+-(void)fetchMorePhotos;
+-(void)clearPhotos;
 
+@property (nonatomic, assign) id<IMAWebServiceDelegate> delegate;
+@property (nonatomic, assign) NSUInteger photoStepSize;
 
 @end

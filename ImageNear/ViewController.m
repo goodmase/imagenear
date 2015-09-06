@@ -13,10 +13,11 @@
 #import "IMAPhotoObject.h"
 #import "IMAPhotoModel.h"
 
-@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, IMAWebServiceDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *photoCollectionView;
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) NSMutableArray *photoObjectList;
 
 @end
 
@@ -25,8 +26,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+    self.photoObjectList = [NSMutableArray new];
     self.imageView = [UIImageView new];
+    [IMAWebServiceModel sharedInstance].delegate = self;
     [self downloadTheData];
 
     
@@ -34,33 +36,7 @@
 }
 -(void)downloadTheData
 {
-    //WebServiceModel *model = [WebServiceModel new];
-    //lat (y) 36.161162 long (x) -86.960907
-    //lat (y) 36.006895 long (x) -86.727448
-    
-    //NSURL *url = [[NSURL alloc] initWithString:@"http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=20&minx=-180&miny=-90&maxx=180&maxy=90&size=medium&mapfilter=true"];
-    NSURL *url = [[NSURL alloc] initWithString:@"http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=20&minx=-86.960907&miny=36.006895&maxx=-86.727448&maxy=36.161162&size=small&mapfilter=true"];
-    //[model downloadJSONFromUrl: url];
-    NSURLSessionDataTask *downloadTask = [[NSURLSession sharedSession]
-                                          dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                              
-                                              NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-                                              
-                                              IMAPhotoModel *photoModel = [IMAPhotoModel sharedInstance];
-                                              [photoModel parseJSONDict:dataDict];
-                                              
-                                            
-  
-                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                  [self.photoCollectionView reloadData];
-                                              });
-                                              
-                                              
-                                              
-                                          }];
-    
-    
-    [downloadTask resume];
+    [[IMAWebServiceModel sharedInstance] fetchMorePhotos];
 }
 
 
@@ -77,7 +53,7 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ImageViewController *imageViewController = [sb instantiateViewControllerWithIdentifier:@"ImageViewController"];
     
-    IMAPhotoObject *photoObj = [IMAPhotoModel sharedInstance].photoObjectList[indexPath.row];
+    IMAPhotoObject *photoObj = self.photoObjectList[indexPath.row];
     
     imageViewController.fullScreenURL = photoObj.largePhotoFileURL;
     [self.navigationController showViewController:imageViewController sender:self];
@@ -107,7 +83,7 @@
 {
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
     
-    IMAPhotoObject *photoObj = [IMAPhotoModel sharedInstance].photoObjectList[indexPath.row];
+    IMAPhotoObject *photoObj = self.photoObjectList[indexPath.row];
     [cell setImageUrl:photoObj.photoFileURL];
     
     return cell;
@@ -115,7 +91,7 @@
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[IMAPhotoModel sharedInstance].photoObjectList count];
+    return [self.photoObjectList count];
 }
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
@@ -126,6 +102,30 @@
     return 3.0f;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)aScrollView {
+    CGPoint offset = aScrollView.contentOffset;
+    CGRect bounds = aScrollView.bounds;
+    CGSize size = aScrollView.contentSize;
+    UIEdgeInsets inset = aScrollView.contentInset;
+    float y = offset.y + bounds.size.height - inset.bottom;
+    float h = size.height;
+    
+    float reload_distance = 10;
+    if(y > h + reload_distance) {
+        NSLog(@"Need moar rows");
+        [[IMAWebServiceModel sharedInstance] fetchMorePhotos];
+    }
+}
+
+#pragma mark - IMAWebService Delegate
+-(void)photoObjectsFetchedByWebservice:(NSArray *)photos
+{
+    
+    [self.photoObjectList addObjectsFromArray:photos];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.photoCollectionView reloadData];
+    });
+}
 
 
 

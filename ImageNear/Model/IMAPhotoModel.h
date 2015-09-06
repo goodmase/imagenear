@@ -11,12 +11,10 @@
 
 @interface IMAPhotoModel : NSObject
 
-@property (nonatomic, strong) NSMutableArray *photoObjectList;
 @property (nonatomic, assign) NSInteger photosAvailable;
 @property (nonatomic, strong) IMAMapObject *mapLocation;
-@property (nonatomic, assign) BOOL hasMorePhotos;
+@property (nonatomic, assign) BOOL isOutOfPhotos;
 
-+(IMAPhotoModel*)sharedInstance;
--(void)parseJSONDict:(NSDictionary *)jsonDict;
+-(NSArray *)parseJSONDict:(NSDictionary *)jsonDict;
 
 @end

@@ -16,25 +16,15 @@
     self = [super init];
     
     if (self) {
-        _photoObjectList = [NSMutableArray new];
+        _mapLocation = [[IMAMapObject alloc] initWithLon:-86.0 andLat:36.149];
         
     }
     return self;
 }
 
-+ (IMAPhotoModel*)sharedInstance
+-(NSArray *)parseJSONDict:(NSDictionary *)jsonDict
 {
-    static IMAPhotoModel *_sharedInstance = nil;
-    static dispatch_once_t oncePredicate;
-
-    dispatch_once(&oncePredicate, ^{
-        _sharedInstance = [[IMAPhotoModel alloc] init];
-    });
-    return _sharedInstance;
-}
-
--(void)parseJSONDict:(NSDictionary *)jsonDict
-{
+    NSMutableArray *mutablePhotoObjects = [NSMutableArray new];
     if ([jsonDict objectForKey:@"map_location"]) {
         double lon = [jsonDict[@"map_location"][@"lon"] doubleValue];
         double lat = [jsonDict[@"map_location"][@"lat"] doubleValue];
@@ -47,13 +37,20 @@
         self.photosAvailable = [jsonDict[@"count"] integerValue];
     }
     if ([jsonDict objectForKey:@"has_more"]) {
-        self.hasMorePhotos = [jsonDict[@"has_more"] boolValue];
+        BOOL hasMore = [jsonDict[@"has_more"] boolValue];
+        if (hasMore) {
+            self.isOutOfPhotos = NO;
+        } else{
+            self.isOutOfPhotos = YES;
+        }
     }
     if ([jsonDict objectForKey:@"photos"]) {
         for (NSDictionary *aDict in jsonDict[@"photos"]) {
-            [self.photoObjectList addObject:[self createPhotoObjectFromDict:aDict]];
+            [mutablePhotoObjects addObject:[self createPhotoObjectFromDict:aDict]];
         }
     }
+    
+    return [mutablePhotoObjects copy];
 
 }
 
