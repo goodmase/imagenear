@@ -10,6 +10,7 @@
 		AA1DC4291B8E9E1E00092B88 /* IMAPhotoObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1DC4281B8E9E1E00092B88 /* IMAPhotoObject.m */; };
 		AA1DC42F1B8EA60200092B88 /* IMAPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1DC42E1B8EA60200092B88 /* IMAPhotoModel.m */; };
 		AA1DC4321B8EA6B500092B88 /* IMAMapObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1DC4311B8EA6B500092B88 /* IMAMapObject.m */; };
+		AA735D1B1B9CBE8400B8567B /* IMAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA735D1A1B9CBE8400B8567B /* IMAConstants.m */; };
 		AA8AC0271B7034D0007B4D12 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC0261B7034D0007B4D12 /* main.m */; };
 		AA8AC02A1B7034D0007B4D12 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC0291B7034D0007B4D12 /* AppDelegate.m */; };
 		AA8AC02D1B7034D0007B4D12 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC02C1B7034D0007B4D12 /* ViewController.m */; };
@@ -41,6 +42,8 @@
 		AA1DC42E1B8EA60200092B88 /* IMAPhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMAPhotoModel.m; path = Model/IMAPhotoModel.m; sourceTree = "<group>"; };
 		AA1DC4301B8EA6B500092B88 /* IMAMapObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMAMapObject.h; path = Model/IMAMapObject.h; sourceTree = "<group>"; };
 		AA1DC4311B8EA6B500092B88 /* IMAMapObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMAMapObject.m; path = Model/IMAMapObject.m; sourceTree = "<group>"; };
+		AA735D191B9CBE8400B8567B /* IMAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMAConstants.h; path = Model/IMAConstants.h; sourceTree = "<group>"; };
+		AA735D1A1B9CBE8400B8567B /* IMAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMAConstants.m; path = Model/IMAConstants.m; sourceTree = "<group>"; };
 		AA8AC0211B7034D0007B4D12 /* ImageNear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageNear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8AC0251B7034D0007B4D12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA8AC0261B7034D0007B4D12 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 			children = (
 				AAB37B9D1B7039D0005F98B3 /* IMAWebServiceModel.h */,
 				AAB37B9E1B7039D0005F98B3 /* IMAWebServiceModel.m */,
+				AA735D191B9CBE8400B8567B /* IMAConstants.h */,
+				AA735D1A1B9CBE8400B8567B /* IMAConstants.m */,
 				AA1DC4271B8E9E1E00092B88 /* IMAPhotoObject.h */,
 				AA1DC4281B8E9E1E00092B88 /* IMAPhotoObject.m */,
 				AA1DC42D1B8EA60200092B88 /* IMAPhotoModel.h */,
@@ -337,6 +342,7 @@
 				AA1DC4321B8EA6B500092B88 /* IMAMapObject.m in Sources */,
 				AAB37BA31B703F24005F98B3 /* CollectionViewCell.m in Sources */,
 				AA8AC02D1B7034D0007B4D12 /* ViewController.m in Sources */,
+				AA735D1B1B9CBE8400B8567B /* IMAConstants.m in Sources */,
 				AA1DC42F1B8EA60200092B88 /* IMAPhotoModel.m in Sources */,
 				AA8AC02A1B7034D0007B4D12 /* AppDelegate.m in Sources */,
 				AA1DC4291B8E9E1E00092B88 /* IMAPhotoObject.m in Sources */,
