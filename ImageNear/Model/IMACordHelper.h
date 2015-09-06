@@ -10,7 +10,7 @@
 
 @interface IMACordHelper : NSObject
 
-+(double)kmFromDegreeLon:(double)lon atLat:(double)lat;
++(double)kmFromDegreesLon:(double)lon atLat:(double)lat;
 +(double)kmFromDegreesLat:(double)lat;
 
 @end
