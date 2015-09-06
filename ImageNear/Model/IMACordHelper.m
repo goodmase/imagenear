@@ -11,14 +11,16 @@
 @implementation IMACordHelper
 
 //calculate the length of degree lon at a certain lat in km
-+(double)lengthOfDegreesLon:(double)lon atLat:(double)lat
++(double)kmFromDegreesLon:(double)lon atLat:(double)lat
 {
     return cos(lat*M_PI/180)*111.325*lon;
 }
 //calculate the length of a degree lat in km
-+(double)lengthOfDegreesLat:(double)lat
++(double)kmFromDegreesLat:(double)lat
 {
     return lat*111.325;
 }
+
+
 
 @end
