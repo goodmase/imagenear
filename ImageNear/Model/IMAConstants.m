@@ -8,8 +8,8 @@
 
 #import "IMAConstants.h"
 
-@implementation IMAConstants
 
 NSString *const WebServiceBaseURL = @"http://www.panoramio.com/map/";
 
-@end
+double const SearchAreaDefault = 5.0f;
+double const SearchAreaAccelerationDefault = 2.0f;

@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface IMAConstants : NSObject
+extern double const SearchAreaDefault;
+extern double const SearchAreaAccelerationDefault;
 
 extern NSString *const WebServiceBaseURL;
-
-@end
