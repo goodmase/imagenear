@@ -75,15 +75,15 @@
     
     NSString *mapLocationString = [self genLocPartURLStringWithMapObject:self.photoModel.mapLocation andSize:_searchSizeKM isAntipod:YES];
     
-    NSString *photoRangeString = [NSString stringWithFormat:@"&from=%lu&to=%lu", (unsigned long)self.photoStartNum, self.photoStartNum+self.photoStepSize];
+    NSString *photoRangeString = [NSString stringWithFormat:@"&from=%lu&to=%u", (unsigned long)self.photoStartNum, self.photoStartNum+self.photoStepSize];
     
     return [NSString stringWithFormat:@"%@get_panoramas.php?set=public%@%@&size=small&mapfilter=true", WebServiceBaseURL, photoRangeString, mapLocationString];
 }
 //size in km
--(NSString *)genLocPartURLStringWithMapObject:(IMAMapObject *)mapObj andSize:(double)size isAntipod:(BOOL)antipod
+-(NSString *)genLocPartURLStringWithMapObject:(IMAMapObject *)mapObj andSize:(double)size isAntipod:(BOOL)antipode
 {
     double lon, lat;
-    if (antipod) {
+    if (antipode) {
         lon = mapObj.antipodeLongitude;
         lat = mapObj.antipodeLatitude;
     } else{
