@@ -21,6 +21,15 @@
     return lat*111.325;
 }
 
++(double)lonFromKm:(double)km atLat:(double)lat
+{
+    return km/(cos(lat*M_PI/180)*111.325);
+}
++(double)latFromKm:(double)km
+{
+    return km/111.325;
+}
+
 
 
 @end

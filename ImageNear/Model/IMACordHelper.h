@@ -12,5 +12,7 @@
 
 +(double)kmFromDegreesLon:(double)lon atLat:(double)lat;
 +(double)kmFromDegreesLat:(double)lat;
++(double)lonFromKm:(double)km atLat:(double)lat;
++(double)latFromKm:(double)km;
 
 @end
