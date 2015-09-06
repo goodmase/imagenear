@@ -14,6 +14,8 @@
 
 @property (nonatomic, assign) double latitude;
 @property (nonatomic, assign) double longitude;
+@property (nonatomic, assign, readonly) double antipodeLatitude;
+@property (nonatomic, assign, readonly) double antipodeLongitude;
 @property (nonatomic, assign) NSInteger panoramioZoom;
 
 @end

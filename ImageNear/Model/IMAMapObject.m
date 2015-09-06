@@ -20,4 +20,20 @@
     return self;
 }
 
+-(double)antipodeLatitude
+{
+    return self.latitude*-1;
+}
+-(double)antipodeLongitude
+{
+    if (self.longitude < 0) {
+        return self.longitude + 180.0;
+    }
+    return self.longitude-180.0;
+}
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"Cord: Lat %.4f, Lon %.4f Antipode: Lat %.4f, Lon %.4f", self.latitude, self.longitude, self.antipodeLatitude, self.antipodeLongitude];
+}
+
 @end
