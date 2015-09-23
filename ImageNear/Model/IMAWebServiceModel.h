@@ -8,20 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol IMAWebServiceDelegate <NSObject>
-- (void)photoObjectsFetchedByWebservice:(NSArray *)photos;
-@end
 
 @interface IMAWebServiceModel : NSObject
 
 +(IMAWebServiceModel*)sharedInstance;
 -(void)setNewLon:(double)lon andLat:(double)lat;
--(void)fetchMorePhotos;
+-(void)fetchMorePhotos:(void(^)(NSArray *photoObjects))callBack;
 -(void)clearPhotos;
 -(void)resetSearchSize;
 -(void)expandSearchAreaTo:(double)sizeInKm;
 
-@property (nonatomic, assign) id<IMAWebServiceDelegate> delegate;
 @property (nonatomic, assign) NSUInteger photoStepSize;
 @property (nonatomic, assign, readonly) double searchSizeKM;
 

@@ -75,7 +75,7 @@
     
     NSString *mapLocationString = [self genLocPartURLStringWithMapObject:self.photoModel.mapLocation andSize:_searchSizeKM isAntipod:YES];
     
-    NSString *photoRangeString = [NSString stringWithFormat:@"&from=%lu&to=%u", (unsigned long)self.photoStartNum, self.photoStartNum+self.photoStepSize];
+    NSString *photoRangeString = [NSString stringWithFormat:@"&from=%lu&to=%lu", (unsigned long)self.photoStartNum, self.photoStartNum+self.photoStepSize];
     
     return [NSString stringWithFormat:@"%@get_panoramas.php?set=public%@%@&size=small&mapfilter=true", WebServiceBaseURL, photoRangeString, mapLocationString];
 }
@@ -111,7 +111,7 @@
     self.isOutOfPhotos = NO;
 }
 
--(void)fetchMorePhotos
+-(void)fetchMorePhotos:(void(^)(NSArray *photoObjects))callBack
 {
     
     
@@ -142,7 +142,7 @@
                 self.photoStartNum += [photoObjects count];
                 
                 self.isRefreshing = NO;
-                [self.delegate photoObjectsFetchedByWebservice:photoObjects];
+                callBack(photoObjects);
                 
                 
                 
