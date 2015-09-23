@@ -11,5 +11,6 @@
 
 extern double const SearchAreaDefault;
 extern double const SearchAreaAccelerationDefault;
+extern NSUInteger const ImageCellsPerRow;
 
 extern NSString *const WebServiceBaseURL;

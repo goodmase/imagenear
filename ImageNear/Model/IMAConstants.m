@@ -13,3 +13,4 @@ NSString *const WebServiceBaseURL = @"http://www.panoramio.com/map/";
 
 double const SearchAreaDefault = 5.0f;
 double const SearchAreaAccelerationDefault = 2.0f;
+NSUInteger const ImageCellsPerRow = 2;

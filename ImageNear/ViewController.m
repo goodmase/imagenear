@@ -20,7 +20,6 @@
 @interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *photoCollectionView;
-@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) NSMutableArray *photoObjectList;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, assign) NSUInteger updateAttempts;
@@ -33,17 +32,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.photoObjectList = [NSMutableArray new];
-    self.imageView = [UIImageView new];
     self.updateAttempts = 1;
     [self downloadTheData];
     
+    
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self setupCellSize];
+}
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
 
+}
+-(void)setupCellSize
+{
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout*)self.photoCollectionView.collectionViewLayout;
+    
+    CGFloat availableWidthForCells = CGRectGetWidth(self.photoCollectionView.frame) - flowLayout.sectionInset.left - flowLayout.sectionInset.right - flowLayout.minimumInteritemSpacing * (ImageCellsPerRow - 1);
     
     
+    CGFloat cellWidth = availableWidthForCells / ImageCellsPerRow;
     
-
-    
-    
+    flowLayout.itemSize = CGSizeMake(cellWidth, cellWidth);
 }
 - (IBAction)updateLocation:(id)sender {
     if (!self.locationManager)
