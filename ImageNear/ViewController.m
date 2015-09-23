@@ -17,7 +17,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, IMAWebServiceDelegate, CLLocationManagerDelegate>
+@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *photoCollectionView;
 @property (nonatomic, strong) UIImageView *imageView;
@@ -34,7 +34,6 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.photoObjectList = [NSMutableArray new];
     self.imageView = [UIImageView new];
-    [IMAWebServiceModel sharedInstance].delegate = self;
     self.updateAttempts = 1;
     [self downloadTheData];
     
@@ -59,7 +58,28 @@
 }
 -(void)downloadTheData
 {
-    [[IMAWebServiceModel sharedInstance] fetchMorePhotos];
+    [[IMAWebServiceModel sharedInstance] fetchMorePhotos:^(NSArray *photoObjects) {
+        [self handlePhotoObjects:photoObjects];
+    }];
+}
+
+-(void)handlePhotoObjects:(NSArray *)photos
+{
+    if ([photos count] == 0) {
+        double currentSearchArea = [IMAWebServiceModel sharedInstance].searchSizeKM;
+        currentSearchArea += SearchAreaAccelerationDefault * (self.updateAttempts*self.updateAttempts);
+        self.updateAttempts += 1;
+        [[IMAWebServiceModel sharedInstance] expandSearchAreaTo:currentSearchArea];
+        [[IMAWebServiceModel sharedInstance] fetchMorePhotos:^(NSArray *photoObjects) {
+            [self handlePhotoObjects:photoObjects];
+        }];
+        NSLog(@"The search are is now %.2f", currentSearchArea);
+    }
+    [self.photoObjectList addObjectsFromArray:photos];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.photoCollectionView reloadData];
+    });
 }
 
 
@@ -136,26 +156,12 @@
     float reload_distance = 10;
     if(y > h + reload_distance) {
         NSLog(@"Need moar rows");
-        [[IMAWebServiceModel sharedInstance] fetchMorePhotos];
+        [[IMAWebServiceModel sharedInstance] fetchMorePhotos:^(NSArray *photoObjects) {
+            [self handlePhotoObjects:photoObjects];
+        }];
     }
 }
 
-#pragma mark - IMAWebService Delegate
--(void)photoObjectsFetchedByWebservice:(NSArray *)photos
-{
-    if ([photos count] == 0) {
-        double currentSearchArea = [IMAWebServiceModel sharedInstance].searchSizeKM;
-        currentSearchArea += SearchAreaAccelerationDefault * (self.updateAttempts*self.updateAttempts);
-        self.updateAttempts += 1;
-        [[IMAWebServiceModel sharedInstance] expandSearchAreaTo:currentSearchArea];
-        [[IMAWebServiceModel sharedInstance] fetchMorePhotos];
-        NSLog(@"The search are is now %.2f", currentSearchArea);
-    }
-    [self.photoObjectList addObjectsFromArray:photos];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.photoCollectionView reloadData];
-    });
-}
 
 #pragma mark - location manager delegate
 
@@ -169,7 +175,9 @@
     [[IMAWebServiceModel sharedInstance] resetSearchSize];
     self.updateAttempts = 1;
     [self.photoObjectList removeAllObjects];
-    [[IMAWebServiceModel sharedInstance] fetchMorePhotos];
+    [[IMAWebServiceModel sharedInstance] fetchMorePhotos:^(NSArray *photoObjects) {
+        [self handlePhotoObjects:photoObjects];
+    }];
     
     NSLog(@"lat: %.6f, lon: %.6f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
     
