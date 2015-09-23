@@ -7,10 +7,10 @@
 //
 
 #import "ImageViewController.h"
-#import <Haneke.h>
+#import "IMAPhotoObject.h"
 
 @interface ImageViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *fullScreenImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *fullScreenImageView;
 
 @end
 
@@ -21,20 +21,14 @@
     
     // Do any additional setup after loading the view.
 }
--(instancetype)init{
-    self = [super init];
-    if (self) {
-        //
-    }
-    return self;
-}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     NSLog(@"View will appear");
     
     NSURLSessionDownloadTask *downloadPhotoTask = [[NSURLSession sharedSession]
-                                                   downloadTaskWithURL:self.fullScreenURL completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+                                                   downloadTaskWithURL:self.photoObject.largePhotoFileURL completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
                                                        if (!error) {
                                                            UIImage *downloadedImage = [UIImage imageWithData:
                                                                                        [NSData dataWithContentsOfURL:location]];

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class IMAPhotoObject;
 @interface ImageViewController : UIViewController
 
-@property (strong, nonatomic) NSURL *fullScreenURL;
+@property (nonatomic, strong) IMAPhotoObject *photoObject;
 
 @end

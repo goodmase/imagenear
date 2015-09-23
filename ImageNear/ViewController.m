@@ -97,8 +97,7 @@
     ImageViewController *imageViewController = [sb instantiateViewControllerWithIdentifier:@"ImageViewController"];
     
     IMAPhotoObject *photoObj = self.photoObjectList[indexPath.row];
-    
-    imageViewController.fullScreenURL = photoObj.largePhotoFileURL;
+    imageViewController.photoObject = photoObj;
     [self.navigationController showViewController:imageViewController sender:self];
     
     
