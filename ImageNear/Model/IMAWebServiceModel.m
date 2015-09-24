@@ -61,6 +61,10 @@
     });
     return shared;
 }
+-(IMAMapObject *)getCurrentMapLocation
+{
+    return self.photoModel.mapLocation;
+}
 -(void)setNewLon:(double)lon andLat:(double)lat
 {
     self.photoModel.isOutOfPhotos = NO;

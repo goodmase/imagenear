@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-
+@class IMAMapObject;
 @interface IMAWebServiceModel : NSObject
 
 +(IMAWebServiceModel*)sharedInstance;
+-(IMAMapObject *)getCurrentMapLocation;
 -(void)setNewLon:(double)lon andLat:(double)lat;
 -(void)fetchMorePhotos:(void(^)(NSArray *photoObjects))callBack;
 -(void)clearPhotos;
