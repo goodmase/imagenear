@@ -22,6 +22,12 @@
 		AAB37B9F1B7039D0005F98B3 /* IMAWebServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB37B9E1B7039D0005F98B3 /* IMAWebServiceModel.m */; };
 		AAB37BA31B703F24005F98B3 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB37BA21B703F24005F98B3 /* CollectionViewCell.m */; };
 		AAB37BA71B72E0A9005F98B3 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB37BA61B72E0A9005F98B3 /* ImageViewController.m */; };
+		AADAF4951BB2EB5C0048E861 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AADAF4941BB2EB5C0048E861 /* MapViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AADAF4971BB2EBB30048E861 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADAF4961BB2EBB30048E861 /* MapKit.framework */; };
+		AADAF49A1BB2ECA20048E861 /* ImageNearTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AADAF4991BB2ECA20048E861 /* ImageNearTabBarController.m */; settings = {ASSET_TAGS = (); }; };
+		AADAF49F1BB2FFD40048E861 /* new_location_pin.png in Resources */ = {isa = PBXBuildFile; fileRef = AADAF49C1BB2FFD40048E861 /* new_location_pin.png */; settings = {ASSET_TAGS = (); }; };
+		AADAF4A01BB2FFD40048E861 /* new_location_pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AADAF49D1BB2FFD40048E861 /* new_location_pin@2x.png */; settings = {ASSET_TAGS = (); }; };
+		AADAF4A11BB2FFD40048E861 /* new_location_pin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AADAF49E1BB2FFD40048E861 /* new_location_pin@3x.png */; settings = {ASSET_TAGS = (); }; };
 		EEBDB490D6F6484DAFBE10D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E62837E05472ABD35F1D8D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +72,14 @@
 		AAB37BA21B703F24005F98B3 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CollectionViewCell.m; path = View/CollectionViewCell.m; sourceTree = "<group>"; };
 		AAB37BA51B72E0A9005F98B3 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageViewController.h; path = Controller/ImageViewController.h; sourceTree = "<group>"; };
 		AAB37BA61B72E0A9005F98B3 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageViewController.m; path = Controller/ImageViewController.m; sourceTree = "<group>"; };
+		AADAF4931BB2EB5C0048E861 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = Controller/MapViewController.h; sourceTree = "<group>"; };
+		AADAF4941BB2EB5C0048E861 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = Controller/MapViewController.m; sourceTree = "<group>"; };
+		AADAF4961BB2EBB30048E861 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		AADAF4981BB2ECA20048E861 /* ImageNearTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageNearTabBarController.h; sourceTree = "<group>"; };
+		AADAF4991BB2ECA20048E861 /* ImageNearTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageNearTabBarController.m; sourceTree = "<group>"; };
+		AADAF49C1BB2FFD40048E861 /* new_location_pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_location_pin.png; sourceTree = "<group>"; };
+		AADAF49D1BB2FFD40048E861 /* new_location_pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_location_pin@2x.png"; sourceTree = "<group>"; };
+		AADAF49E1BB2FFD40048E861 /* new_location_pin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_location_pin@3x.png"; sourceTree = "<group>"; };
 		CF3F08A387B2EB171B7CA1E3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D7E62837E05472ABD35F1D8D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -75,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AADAF4971BB2EBB30048E861 /* MapKit.framework in Frameworks */,
 				EEBDB490D6F6484DAFBE10D1 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +116,7 @@
 		2E4CCB018DC282716C4EFFA1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AADAF4961BB2EBB30048E861 /* MapKit.framework */,
 				D7E62837E05472ABD35F1D8D /* libPods.a */,
 			);
 			name = Frameworks;
@@ -145,6 +161,7 @@
 		AA8AC0241B7034D0007B4D12 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AADAF49B1BB2FFD40048E861 /* ui_icons */,
 				AA8AC0251B7034D0007B4D12 /* Info.plist */,
 				AA8AC0261B7034D0007B4D12 /* main.m */,
 			);
@@ -199,12 +216,26 @@
 		AAB37BA81B72E0B2005F98B3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AADAF4981BB2ECA20048E861 /* ImageNearTabBarController.h */,
+				AADAF4991BB2ECA20048E861 /* ImageNearTabBarController.m */,
 				AA8AC02B1B7034D0007B4D12 /* ViewController.h */,
 				AA8AC02C1B7034D0007B4D12 /* ViewController.m */,
+				AADAF4931BB2EB5C0048E861 /* MapViewController.h */,
+				AADAF4941BB2EB5C0048E861 /* MapViewController.m */,
 				AAB37BA51B72E0A9005F98B3 /* ImageViewController.h */,
 				AAB37BA61B72E0A9005F98B3 /* ImageViewController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		AADAF49B1BB2FFD40048E861 /* ui_icons */ = {
+			isa = PBXGroup;
+			children = (
+				AADAF49C1BB2FFD40048E861 /* new_location_pin.png */,
+				AADAF49D1BB2FFD40048E861 /* new_location_pin@2x.png */,
+				AADAF49E1BB2FFD40048E861 /* new_location_pin@3x.png */,
+			);
+			path = ui_icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,8 +321,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA8AC0301B7034D0007B4D12 /* Main.storyboard in Resources */,
+				AADAF4A11BB2FFD40048E861 /* new_location_pin@3x.png in Resources */,
 				AA8AC0351B7034D0007B4D12 /* LaunchScreen.xib in Resources */,
 				AA8AC0321B7034D0007B4D12 /* Images.xcassets in Resources */,
+				AADAF4A01BB2FFD40048E861 /* new_location_pin@2x.png in Resources */,
+				AADAF49F1BB2FFD40048E861 /* new_location_pin.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,7 +378,9 @@
 			files = (
 				AAB37BA71B72E0A9005F98B3 /* ImageViewController.m in Sources */,
 				AAB37B9F1B7039D0005F98B3 /* IMAWebServiceModel.m in Sources */,
+				AADAF49A1BB2ECA20048E861 /* ImageNearTabBarController.m in Sources */,
 				AA1DC4321B8EA6B500092B88 /* IMAMapObject.m in Sources */,
+				AADAF4951BB2EB5C0048E861 /* MapViewController.m in Sources */,
 				AAB37BA31B703F24005F98B3 /* CollectionViewCell.m in Sources */,
 				AA8AC02D1B7034D0007B4D12 /* ViewController.m in Sources */,
 				AA735D211B9CD6C600B8567B /* IMACordHelper.m in Sources */,

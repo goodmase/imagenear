@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gAu-8b-Ky2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zps-5Y-pC7">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Images-->
         <scene sceneID="GMs-aM-wvY">
             <objects>
                 <navigationController id="gAu-8b-Ky2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Images" id="dWt-2F-7xb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="e0V-OI-JQY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="H5n-lj-ay5"/>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="t0v-W7-3MB"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R0L-LU-KFO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-657" y="364"/>
+            <point key="canvasLocation" x="1295" y="256"/>
         </scene>
         <!--ImageNear-->
         <scene sceneID="ufC-wZ-h7g">
@@ -31,11 +32,11 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uIG-iK-pcB">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uIG-iK-pcB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="MNH-t8-Hn6">
                                     <size key="itemSize" width="122" height="122"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -81,6 +82,7 @@
                             <constraint firstItem="uIG-iK-pcB" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="JEG-eg-jvC"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="6Jb-Sg-vkD"/>
                     <navigationItem key="navigationItem" title="ImageNear" id="uGH-Um-07G">
                         <barButtonItem key="rightBarButtonItem" title="Update" id="WhX-et-2qx">
                             <connections>
@@ -95,6 +97,51 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1963.5" y="255.5"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="RJy-sH-HHA">
+            <objects>
+                <viewController title="Map" id="eLq-RU-cGM" customClass="MapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DiL-oH-ezS"/>
+                        <viewControllerLayoutGuide type="bottom" id="F5I-x2-QJy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Ek-lq-1Lf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqY-lX-gK3">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                            </mapView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_location_pin.png" translatesAutoresizingMaskIntoConstraints="NO" id="e6N-aq-0cC">
+                                <rect key="frame" x="179" y="307" width="16" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="IH8-e5-T87"/>
+                                    <constraint firstAttribute="height" constant="24" id="fkQ-Uc-ENS"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="nqY-lX-gK3" secondAttribute="trailing" constant="-16" id="6ZP-3s-tCx"/>
+                            <constraint firstItem="nqY-lX-gK3" firstAttribute="leading" secondItem="3Ek-lq-1Lf" secondAttribute="leadingMargin" constant="-16" id="A4n-fV-6HL"/>
+                            <constraint firstItem="e6N-aq-0cC" firstAttribute="centerX" secondItem="nqY-lX-gK3" secondAttribute="centerX" id="AIF-wg-zqw"/>
+                            <constraint firstItem="e6N-aq-0cC" firstAttribute="centerY" secondItem="nqY-lX-gK3" secondAttribute="centerY" id="HpG-91-tes"/>
+                            <constraint firstItem="F5I-x2-QJy" firstAttribute="top" secondItem="nqY-lX-gK3" secondAttribute="bottom" id="HvN-1B-uyP"/>
+                            <constraint firstItem="nqY-lX-gK3" firstAttribute="top" secondItem="DiL-oH-ezS" secondAttribute="bottom" id="oyn-4N-t9f"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" id="tfo-Ar-E9y"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="centerPinView" destination="e6N-aq-0cC" id="7eD-9i-0jz"/>
+                        <outlet property="mapView" destination="nqY-lX-gK3" id="Gbc-0v-5yM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tdx-U5-H1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1141.5" y="1057.5"/>
         </scene>
         <!--ImageViewController-->
         <scene sceneID="akW-pz-q6G">
@@ -127,7 +174,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0N-PX-6V8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="885.5" y="330.5"/>
+            <point key="canvasLocation" x="2538.5" y="287.5"/>
+        </scene>
+        <!--Image Near Tab Bar Controller-->
+        <scene sceneID="Uzo-z1-VPI">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="zps-5Y-pC7" customClass="ImageNearTabBarController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="03G-md-McR">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="gAu-8b-Ky2" kind="relationship" relationship="viewControllers" id="jHp-MU-9xO"/>
+                        <segue destination="eLq-RU-cGM" kind="relationship" relationship="viewControllers" id="6Sz-4q-dD1"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="raY-TL-r48" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="499" y="565"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="new_location_pin.png" width="17" height="24"/>
+    </resources>
 </document>

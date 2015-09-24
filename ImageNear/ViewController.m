@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSMutableArray *photoObjectList;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, assign) NSUInteger updateAttempts;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -33,9 +34,18 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.photoObjectList = [NSMutableArray new];
     self.updateAttempts = 1;
-    [self downloadTheData];
     
+    [self setupRefreshControl];
+    //[self downloadTheData];
     
+}
+-(void)setupRefreshControl
+{
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor purpleColor];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self action:@selector(refreshImages:) forControlEvents:UIControlEventValueChanged];
+    [self.photoCollectionView addSubview:self.refreshControl];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -55,6 +65,33 @@
     CGFloat cellWidth = availableWidthForCells / ImageCellsPerRow;
     
     flowLayout.itemSize = CGSizeMake(cellWidth, cellWidth);
+}
+-(void)clearAllImages{
+    [[IMAWebServiceModel sharedInstance] clearPhotos];
+    [[IMAWebServiceModel sharedInstance] resetSearchSize];
+    [self.photoObjectList removeAllObjects];
+    [self.photoCollectionView reloadData];
+}
+-(void)refreshImages:(id)sender
+{
+    //clear current images
+    [self clearAllImages];
+    
+    //download fresh ones
+    [self downloadTheData];
+    if (self.refreshControl) {
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+        NSDictionary *attDict = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+        NSAttributedString *attTitle = [[NSAttributedString alloc] initWithString:title attributes:attDict];
+        self.refreshControl.attributedTitle = attTitle;
+        [self.refreshControl endRefreshing];
+    }
+    
+    
+    
+    
 }
 - (IBAction)updateLocation:(id)sender {
     if (!self.locationManager)
@@ -130,7 +167,22 @@
 #pragma mark - CollectionView Datasources
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    if ([self.photoObjectList count] > 0) {
+        self.photoCollectionView.backgroundView = nil;
+        return 1;
+    } else{
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.photoCollectionView.bounds.size.width, self.photoCollectionView.bounds.size.height)];
+        messageLabel.text = @"No images. Please pull down to refresh.";
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        messageLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0f];
+        messageLabel.textColor = [UIColor whiteColor];
+        [messageLabel sizeToFit];
+        
+        self.photoCollectionView.backgroundView = messageLabel;
+        
+    }
+    return 0;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -164,7 +216,7 @@
     float h = size.height;
     
     float reload_distance = 10;
-    if(y > h + reload_distance) {
+    if(y > h + reload_distance && [self.photoObjectList count] > 0) {
         NSLog(@"Need moar rows");
         [[IMAWebServiceModel sharedInstance] fetchMorePhotos:^(NSArray *photoObjects) {
             [self handlePhotoObjects:photoObjects];
@@ -196,6 +248,13 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
+    
+    [self.photoObjectList removeAllObjects];
+    [[IMAWebServiceModel sharedInstance] fetchMorePhotos:^(NSArray *photoObjects) {
+        
+        [self handlePhotoObjects:photoObjects];
+    }];
+    
     NSLog(@"Cannot find the location.");
 }
 
