@@ -249,12 +249,6 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     
-    [self.photoObjectList removeAllObjects];
-    [[IMAWebServiceModel sharedInstance] fetchMorePhotos:^(NSArray *photoObjects) {
-        
-        [self handlePhotoObjects:photoObjects];
-    }];
-    
     NSLog(@"Cannot find the location.");
 }
 

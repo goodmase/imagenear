@@ -84,7 +84,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="6Jb-Sg-vkD"/>
                     <navigationItem key="navigationItem" title="ImageNear" id="uGH-Um-07G">
-                        <barButtonItem key="rightBarButtonItem" title="Update" id="WhX-et-2qx">
+                        <barButtonItem key="rightBarButtonItem" title="Get Location" id="WhX-et-2qx">
                             <connections>
                                 <action selector="updateLocation:" destination="vXZ-lx-hvc" id="Wej-Ib-jys"/>
                             </connections>
