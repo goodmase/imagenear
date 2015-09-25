@@ -16,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) MKPointAnnotation *currentLocation;
 @property (nonatomic, strong) MKPointAnnotation *centerLocation;
-@property (nonatomic, assign) BOOL isMapFinishedLoading;
 @property (weak, nonatomic) IBOutlet UIImageView *centerPinView;
 
 @end
@@ -30,6 +29,11 @@
 
     
 }
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.centerPinView.hidden = YES;
+}
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -38,12 +42,12 @@
         CLLocationCoordinate2D center = self.mapView.centerCoordinate;
         [[IMAWebServiceModel sharedInstance] setNewLon:center.longitude andLat:center.latitude];
         [[IMAWebServiceModel sharedInstance] resetSearchSize];
-        [self.imageCollectionView clearAllImages];
+        [self.imageCollectionView refreshImages:nil];
     }
-    
-    self.isMapFinishedLoading = NO;
-    self.centerPinView.hidden = YES;
+    //remove our annotation
+    [self.mapView removeAnnotation:self.currentLocation];
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -66,14 +70,11 @@
     
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(currentLocation.latitude, currentLocation.longitude);
     
-    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-    
-    point.coordinate = center;
-    
-    point.title = @"My location";
-    
-    
-    [self.mapView addAnnotation:point];
+    self.currentLocation = [[MKPointAnnotation alloc] init];
+    self.currentLocation.coordinate = center;
+    self.currentLocation.title = @"My location";
+
+    [self.mapView addAnnotation:self.currentLocation];
 }
 -(void)updateCenterLocation:(CLLocationCoordinate2D)center
 {
@@ -92,7 +93,7 @@
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
     
-    if (self.centerPinView.hidden && self.isMapFinishedLoading) {
+    if (self.centerPinView.hidden) {
         self.centerPinView.hidden = NO;
     
     }
@@ -104,10 +105,9 @@
 }
 -(void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
 {
-    if (!self.isMapFinishedLoading) {
-        self.isMapFinishedLoading = YES;
-    }
+
 }
+
 /*
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {

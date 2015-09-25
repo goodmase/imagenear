@@ -42,7 +42,7 @@
 -(void)setupRefreshControl
 {
     self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor purpleColor];
+    self.refreshControl.backgroundColor = [UIColor blackColor];
     self.refreshControl.tintColor = [UIColor whiteColor];
     [self.refreshControl addTarget:self action:@selector(refreshImages:) forControlEvents:UIControlEventValueChanged];
     [self.photoCollectionView addSubview:self.refreshControl];

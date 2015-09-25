@@ -11,6 +11,7 @@
 @interface ViewController : UIViewController
 
 -(void)clearAllImages;
+-(void)refreshImages:(id)sender;
 
 @end
 
