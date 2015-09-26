@@ -44,6 +44,7 @@
         [[IMAWebServiceModel sharedInstance] resetSearchSize];
         [self.imageCollectionView refreshImages:nil];
     }
+    self.centerPinView.hidden = YES;
     //remove our annotation
     [self.mapView removeAnnotation:self.currentLocation];
 }
