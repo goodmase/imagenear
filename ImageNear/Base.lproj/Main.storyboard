@@ -10,7 +10,7 @@
         <scene sceneID="GMs-aM-wvY">
             <objects>
                 <navigationController id="gAu-8b-Ky2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Images" id="dWt-2F-7xb"/>
+                    <tabBarItem key="tabBarItem" title="Images" image="tab_bar_image_icon.png" id="dWt-2F-7xb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="e0V-OI-JQY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -132,7 +132,7 @@
                             <constraint firstItem="nqY-lX-gK3" firstAttribute="top" secondItem="DiL-oH-ezS" secondAttribute="bottom" id="oyn-4N-t9f"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="tfo-Ar-E9y"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="tab_bar_map_icon.png" id="tfo-Ar-E9y"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="centerPinView" destination="e6N-aq-0cC" id="7eD-9i-0jz"/>
@@ -198,5 +198,7 @@
     </scenes>
     <resources>
         <image name="new_location_pin.png" width="17" height="24"/>
+        <image name="tab_bar_image_icon.png" width="48" height="32"/>
+        <image name="tab_bar_map_icon.png" width="48" height="32"/>
     </resources>
 </document>
