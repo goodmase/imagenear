@@ -23,4 +23,11 @@
     
 }
 
+-(NSString *)description{
+
+    NSString *desc = [NSString stringWithFormat:@"placeID:%@\n ownerName:%@\n title:%@\n", self.placeID, self.ownerName, self.photoTitle];
+    return desc;
+    
+}
+
 @end

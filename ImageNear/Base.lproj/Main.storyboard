@@ -121,6 +121,20 @@
                                     <constraint firstAttribute="height" constant="24" id="fkQ-Uc-ENS"/>
                                 </constraints>
                             </imageView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sln-go-KSk">
+                                <rect key="frame" x="123" y="580" width="130" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.32156862745098036" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Z4z-wN-Hdf"/>
+                                    <constraint firstAttribute="width" constant="130" id="sVN-Ml-52H"/>
+                                </constraints>
+                                <state key="normal" title="Update Location">
+                                    <color key="titleColor" red="0.96862745100000003" green="0.98823529409999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="updateLocationButtonPressed:" destination="eLq-RU-cGM" eventType="touchUpInside" id="Ey2-cq-Khl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -129,7 +143,9 @@
                             <constraint firstItem="e6N-aq-0cC" firstAttribute="centerX" secondItem="nqY-lX-gK3" secondAttribute="centerX" id="AIF-wg-zqw"/>
                             <constraint firstItem="e6N-aq-0cC" firstAttribute="centerY" secondItem="nqY-lX-gK3" secondAttribute="centerY" id="HpG-91-tes"/>
                             <constraint firstItem="F5I-x2-QJy" firstAttribute="top" secondItem="nqY-lX-gK3" secondAttribute="bottom" id="HvN-1B-uyP"/>
+                            <constraint firstItem="Sln-go-KSk" firstAttribute="centerX" secondItem="3Ek-lq-1Lf" secondAttribute="centerX" id="czt-PD-RGa"/>
                             <constraint firstItem="nqY-lX-gK3" firstAttribute="top" secondItem="DiL-oH-ezS" secondAttribute="bottom" id="oyn-4N-t9f"/>
+                            <constraint firstItem="F5I-x2-QJy" firstAttribute="top" secondItem="Sln-go-KSk" secondAttribute="bottom" constant="8" id="vhx-LI-jbD"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="tab_bar_map_icon.png" id="tfo-Ar-E9y"/>
@@ -137,6 +153,7 @@
                     <connections>
                         <outlet property="centerPinView" destination="e6N-aq-0cC" id="7eD-9i-0jz"/>
                         <outlet property="mapView" destination="nqY-lX-gK3" id="Gbc-0v-5yM"/>
+                        <outlet property="updateLocationButtonProperties" destination="Sln-go-KSk" id="ti4-Tf-PZR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tdx-U5-H1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -156,7 +173,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FKO-XT-Tf0">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="547"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -164,7 +181,7 @@
                             <constraint firstItem="FKO-XT-Tf0" firstAttribute="leading" secondItem="Ff6-ED-hhg" secondAttribute="leadingMargin" constant="-16" id="5Q0-v0-HQg"/>
                             <constraint firstItem="FKO-XT-Tf0" firstAttribute="top" secondItem="Ff6-ED-hhg" secondAttribute="topMargin" id="ASc-eK-8El"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FKO-XT-Tf0" secondAttribute="trailing" constant="-16" id="H7v-pq-wXG"/>
-                            <constraint firstItem="Eq2-eU-J9p" firstAttribute="top" secondItem="FKO-XT-Tf0" secondAttribute="bottom" id="LRw-55-Jp6"/>
+                            <constraint firstItem="Eq2-eU-J9p" firstAttribute="top" secondItem="FKO-XT-Tf0" secondAttribute="bottom" constant="120" id="LRw-55-Jp6"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

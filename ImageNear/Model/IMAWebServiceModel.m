@@ -139,9 +139,8 @@
                 //TODO handle errors
                 
             } else {
-                NSArray *photoObjects = [NSArray new];
                 NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-                photoObjects = [self.photoModel parseJSONDict:dataDict];
+                NSArray *photoObjects = [self.photoModel parseJSONDict:dataDict];
                 
                 self.photoStartNum += [photoObjects count];
                 

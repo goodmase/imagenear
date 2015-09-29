@@ -17,6 +17,8 @@
 @property (nonatomic, strong) MKPointAnnotation *currentLocation;
 @property (nonatomic, strong) MKPointAnnotation *centerLocation;
 @property (weak, nonatomic) IBOutlet UIImageView *centerPinView;
+@property (weak, nonatomic) IBOutlet UIButton *updateLocationButtonProperties;
+@property (nonatomic, assign) BOOL isLocationUpdated;
 
 @end
 
@@ -33,20 +35,21 @@
 {
     [super viewDidAppear:animated];
     self.centerPinView.hidden = YES;
+    self.updateLocationButtonProperties.hidden = YES;
+    [self setupButtonShadows];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    if (!self.centerPinView.hidden) {
-        CLLocationCoordinate2D center = self.mapView.centerCoordinate;
-        [[IMAWebServiceModel sharedInstance] setNewLon:center.longitude andLat:center.latitude];
-        [[IMAWebServiceModel sharedInstance] resetSearchSize];
-        [self.imageCollectionView refreshImages:nil];
-    }
+
     self.centerPinView.hidden = YES;
+    self.updateLocationButtonProperties.hidden = YES;
     //remove our annotation
     [self.mapView removeAnnotation:self.currentLocation];
+    if (self.isLocationUpdated) {
+        [self.imageCollectionView refreshImages:nil];
+        self.isLocationUpdated = NO;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -54,6 +57,14 @@
     [super viewWillAppear:animated];
     [self updateRegion];
     [self addCurrentLocationAnnotation];
+}
+-(void)setupButtonShadows
+{
+    CALayer *updateLocationLayer = [self.updateLocationButtonProperties layer];
+    updateLocationLayer.shadowColor = [UIColor darkGrayColor].CGColor;
+    updateLocationLayer.shadowOpacity = 0.8f;
+    updateLocationLayer.shadowRadius = 1.0f;
+    updateLocationLayer.shadowOffset = CGSizeMake(1.0f, 1.0f);
 }
 -(void)updateRegion
 {
@@ -86,6 +97,19 @@
     }
     self.centerLocation.coordinate = center;
 }
+- (IBAction)updateLocationButtonPressed:(id)sender {
+    
+    CLLocationCoordinate2D center = self.mapView.centerCoordinate;
+    [self.mapView removeAnnotation:self.currentLocation];
+    [self updateCenterLocation:center];
+    
+    [[IMAWebServiceModel sharedInstance] setNewLon:center.longitude andLat:center.latitude];
+    [[IMAWebServiceModel sharedInstance] resetSearchSize];
+    
+    self.isLocationUpdated = YES;
+    
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -96,6 +120,7 @@
     
     if (self.centerPinView.hidden) {
         self.centerPinView.hidden = NO;
+        self.updateLocationButtonProperties.hidden = NO;
     
     }
     
