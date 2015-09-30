@@ -175,23 +175,34 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FKO-XT-Tf0">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="547"/>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ksc-4m-2b3">
+                                <rect key="frame" x="16" y="547" width="343" height="120"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FKO-XT-Tf0" firstAttribute="leading" secondItem="Ff6-ED-hhg" secondAttribute="leadingMargin" constant="-16" id="5Q0-v0-HQg"/>
                             <constraint firstItem="FKO-XT-Tf0" firstAttribute="top" secondItem="Ff6-ED-hhg" secondAttribute="topMargin" id="ASc-eK-8El"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FKO-XT-Tf0" secondAttribute="trailing" constant="-16" id="H7v-pq-wXG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ksc-4m-2b3" secondAttribute="trailing" id="IqW-Yt-xdf"/>
                             <constraint firstItem="Eq2-eU-J9p" firstAttribute="top" secondItem="FKO-XT-Tf0" secondAttribute="bottom" constant="120" id="LRw-55-Jp6"/>
+                            <constraint firstItem="Eq2-eU-J9p" firstAttribute="top" secondItem="ksc-4m-2b3" secondAttribute="bottom" id="phe-OC-df8"/>
+                            <constraint firstItem="ksc-4m-2b3" firstAttribute="top" secondItem="FKO-XT-Tf0" secondAttribute="bottom" id="sRe-0A-NVU"/>
+                            <constraint firstItem="ksc-4m-2b3" firstAttribute="leading" secondItem="Ff6-ED-hhg" secondAttribute="leadingMargin" id="xlQ-Zo-VBk"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="fullScreenImageView" destination="FKO-XT-Tf0" id="Tl8-En-NGJ"/>
+                        <outlet property="textViewProperties" destination="ksc-4m-2b3" id="BjW-zw-pUC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0N-PX-6V8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2538.5" y="287.5"/>
+            <point key="canvasLocation" x="2713.5" y="214.5"/>
         </scene>
         <!--Image Near Tab Bar Controller-->
         <scene sceneID="Uzo-z1-VPI">

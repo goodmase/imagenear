@@ -8,9 +8,11 @@
 
 #import "ImageViewController.h"
 #import "IMAPhotoObject.h"
+#import "IMAWebServiceModel.h"
 
 @interface ImageViewController ()
 @property (nonatomic, weak) IBOutlet UIImageView *fullScreenImageView;
+@property (weak, nonatomic) IBOutlet UITextView *textViewProperties;
 
 @end
 
@@ -21,29 +23,26 @@
     
     // Do any additional setup after loading the view.
 }
+-(void)setupTextView{
+    
+    NSString *textViewString = [NSString stringWithFormat:@"%@\n"];
+    
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     NSLog(@"View will appear");
     
-    NSURLSessionDownloadTask *downloadPhotoTask = [[NSURLSession sharedSession]
-                                                   downloadTaskWithURL:self.photoObject.largePhotoFileURL completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-                                                       if (!error) {
-                                                           UIImage *downloadedImage = [UIImage imageWithData:
-                                                                                       [NSData dataWithContentsOfURL:location]];
-                                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                                               self.fullScreenImageView.image = downloadedImage;
-                                                               
-                                                           });
-                                                           
-                                                           
-                                                       }
-                                                       
-                                                   }];
+    self.navigationItem.title = self.photoObject.photoTitle;
     
-    
-    [downloadPhotoTask resume];
+    [[IMAWebServiceModel sharedInstance] downloadPhotoWithURL:self.photoObject.largePhotoFileURL completionHandler:^(UIImage *image, NSError *error) {
+        if (!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.fullScreenImageView.image = image;
+            });
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
