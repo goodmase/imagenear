@@ -46,6 +46,7 @@
     self.updateLocationButtonProperties.hidden = YES;
     //remove our annotation
     [self.mapView removeAnnotation:self.currentLocation];
+    [self.mapView removeAnnotation:self.centerLocation];
     if (self.isLocationUpdated) {
         [self.imageCollectionView refreshImages:nil];
         self.isLocationUpdated = NO;
