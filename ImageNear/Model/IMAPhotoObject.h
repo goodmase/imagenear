@@ -11,11 +11,11 @@
 
 @interface IMAPhotoObject : NSObject
 
-@property (nonatomic, strong) NSString *placeID;
-@property (nonatomic, strong) NSString *ownerName;
+@property (nonatomic, copy) NSString *placeID;
+@property (nonatomic, copy) NSString *ownerName;
 @property (nonatomic, strong) IMAMapObject *photoLocation;
 @property (nonatomic, assign) NSInteger ownerID;
-@property (nonatomic, strong) NSString *photoTitle;
+@property (nonatomic, copy) NSString *photoTitle;
 @property (nonatomic, strong) NSDate *uploadDate;
 @property (nonatomic, assign) NSInteger photoHeight;
 @property (nonatomic, assign) NSInteger photoWidth;
