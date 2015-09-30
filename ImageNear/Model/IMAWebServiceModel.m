@@ -137,6 +137,7 @@
             if (error) {
                 
                 //TODO handle errors
+                self.isRefreshing = NO;
                 
             } else {
                 NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
@@ -154,6 +155,20 @@
             
         }] resume];
     }
+    
+}
+
+-(void)downloadPhotoWithURL:(NSURL *)photoURL completionHandler:(void(^)(UIImage *image, NSError *error))callBack
+
+{
+    [[[NSURLSession sharedSession] dataTaskWithRequest:[NSURLRequest requestWithURL:photoURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (!error) {
+            UIImage *downloadedImage = [UIImage imageWithData:data];
+            callBack(downloadedImage, error);
+        } else{
+            callBack(nil, error);
+        }
+    }] resume];
     
 }
 
