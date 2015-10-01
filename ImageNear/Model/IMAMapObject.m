@@ -33,7 +33,7 @@
 }
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"Cord: Lat %.4f, Lon %.4f Antipode: Lat %.4f, Lon %.4f", self.latitude, self.longitude, self.antipodeLatitude, self.antipodeLongitude];
+    return [NSString stringWithFormat:@"Lon %.4f Lat %.4f", self.longitude, self.latitude];
 }
 
 @end

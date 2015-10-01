@@ -102,6 +102,7 @@
     
     CLLocationCoordinate2D center = self.mapView.centerCoordinate;
     [self.mapView removeAnnotation:self.currentLocation];
+    [self.mapView removeAnnotation:self.centerLocation];
     [self updateCenterLocation:center];
     
     [[IMAWebServiceModel sharedInstance] setNewLon:center.longitude andLat:center.latitude];

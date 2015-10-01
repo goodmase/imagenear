@@ -14,6 +14,7 @@
 #import "IMAPhotoModel.h"
 #import "IMAMapObject.h"
 #import "IMAConstants.h"
+#import "ImageNearPhotoViewController.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -141,11 +142,15 @@
 #pragma mark - CollectionView Delegates
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ImageViewController *imageViewController = [sb instantiateViewControllerWithIdentifier:@"ImageViewController"];
     
+    //UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    //ImageViewController *imageViewController = [sb instantiateViewControllerWithIdentifier:@"ImageViewController"];
+    
+    ImageNearPhotoViewController *imageViewController = [[ImageNearPhotoViewController alloc] init];
     IMAPhotoObject *photoObj = self.photoObjectList[indexPath.row];
     imageViewController.photoObject = photoObj;
+    
+    
     [self.navigationController showViewController:imageViewController sender:self];
     
     

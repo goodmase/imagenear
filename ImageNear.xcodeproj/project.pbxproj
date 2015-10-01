@@ -10,6 +10,11 @@
 		AA1DC4291B8E9E1E00092B88 /* IMAPhotoObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1DC4281B8E9E1E00092B88 /* IMAPhotoObject.m */; };
 		AA1DC42F1B8EA60200092B88 /* IMAPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1DC42E1B8EA60200092B88 /* IMAPhotoModel.m */; };
 		AA1DC4321B8EA6B500092B88 /* IMAMapObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1DC4311B8EA6B500092B88 /* IMAMapObject.m */; };
+		AA6B52DC1BBC3B2C004167F7 /* ImageNearPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B52DB1BBC3B2C004167F7 /* ImageNearPhotoViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AA6B52E01BBC3B7A004167F7 /* IMAPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B52DE1BBC3B7A004167F7 /* IMAPhotoTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		AA6B52E11BBC3B7A004167F7 /* IMAPhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA6B52DF1BBC3B7A004167F7 /* IMAPhotoTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		AA6B52E51BBC3BA0004167F7 /* IMADescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B52E31BBC3B9F004167F7 /* IMADescriptionTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		AA6B52E61BBC3BA0004167F7 /* IMADescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA6B52E41BBC3BA0004167F7 /* IMADescriptionTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		AA735D1B1B9CBE8400B8567B /* IMAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA735D1A1B9CBE8400B8567B /* IMAConstants.m */; };
 		AA735D211B9CD6C600B8567B /* IMACordHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AA735D201B9CD6C600B8567B /* IMACordHelper.m */; };
 		AA8AC0271B7034D0007B4D12 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC0261B7034D0007B4D12 /* main.m */; };
@@ -55,6 +60,14 @@
 		AA1DC42E1B8EA60200092B88 /* IMAPhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMAPhotoModel.m; path = Model/IMAPhotoModel.m; sourceTree = "<group>"; };
 		AA1DC4301B8EA6B500092B88 /* IMAMapObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMAMapObject.h; path = Model/IMAMapObject.h; sourceTree = "<group>"; };
 		AA1DC4311B8EA6B500092B88 /* IMAMapObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMAMapObject.m; path = Model/IMAMapObject.m; sourceTree = "<group>"; };
+		AA6B52DA1BBC3B2C004167F7 /* ImageNearPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageNearPhotoViewController.h; path = Controller/ImageNearPhotoViewController.h; sourceTree = "<group>"; };
+		AA6B52DB1BBC3B2C004167F7 /* ImageNearPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageNearPhotoViewController.m; path = Controller/ImageNearPhotoViewController.m; sourceTree = "<group>"; };
+		AA6B52DD1BBC3B7A004167F7 /* IMAPhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAPhotoTableViewCell.h; sourceTree = "<group>"; };
+		AA6B52DE1BBC3B7A004167F7 /* IMAPhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAPhotoTableViewCell.m; sourceTree = "<group>"; };
+		AA6B52DF1BBC3B7A004167F7 /* IMAPhotoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IMAPhotoTableViewCell.xib; sourceTree = "<group>"; };
+		AA6B52E21BBC3B9F004167F7 /* IMADescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMADescriptionTableViewCell.h; sourceTree = "<group>"; };
+		AA6B52E31BBC3B9F004167F7 /* IMADescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMADescriptionTableViewCell.m; sourceTree = "<group>"; };
+		AA6B52E41BBC3BA0004167F7 /* IMADescriptionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IMADescriptionTableViewCell.xib; sourceTree = "<group>"; };
 		AA735D191B9CBE8400B8567B /* IMAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMAConstants.h; path = Model/IMAConstants.h; sourceTree = "<group>"; };
 		AA735D1A1B9CBE8400B8567B /* IMAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMAConstants.m; path = Model/IMAConstants.m; sourceTree = "<group>"; };
 		AA735D1F1B9CD6C600B8567B /* IMACordHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMACordHelper.h; path = Model/IMACordHelper.h; sourceTree = "<group>"; };
@@ -236,6 +249,14 @@
 				AADAF4941BB2EB5C0048E861 /* MapViewController.m */,
 				AAB37BA51B72E0A9005F98B3 /* ImageViewController.h */,
 				AAB37BA61B72E0A9005F98B3 /* ImageViewController.m */,
+				AA6B52E21BBC3B9F004167F7 /* IMADescriptionTableViewCell.h */,
+				AA6B52E31BBC3B9F004167F7 /* IMADescriptionTableViewCell.m */,
+				AA6B52E41BBC3BA0004167F7 /* IMADescriptionTableViewCell.xib */,
+				AA6B52DD1BBC3B7A004167F7 /* IMAPhotoTableViewCell.h */,
+				AA6B52DE1BBC3B7A004167F7 /* IMAPhotoTableViewCell.m */,
+				AA6B52DF1BBC3B7A004167F7 /* IMAPhotoTableViewCell.xib */,
+				AA6B52DA1BBC3B2C004167F7 /* ImageNearPhotoViewController.h */,
+				AA6B52DB1BBC3B2C004167F7 /* ImageNearPhotoViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -344,12 +365,14 @@
 				AADAF4A11BB2FFD40048E861 /* new_location_pin@3x.png in Resources */,
 				AA8AC0351B7034D0007B4D12 /* LaunchScreen.xib in Resources */,
 				AACD6F161BB8DB0B0069E5D8 /* tab_bar_map_icon.png in Resources */,
+				AA6B52E61BBC3BA0004167F7 /* IMADescriptionTableViewCell.xib in Resources */,
 				AACD6F171BB8DB0B0069E5D8 /* tab_bar_map_icon@2x.png in Resources */,
 				AA8AC0321B7034D0007B4D12 /* Images.xcassets in Resources */,
 				AADAF4A01BB2FFD40048E861 /* new_location_pin@2x.png in Resources */,
 				AACD6F1D1BB8DB120069E5D8 /* tab_bar_image_icon@2x.png in Resources */,
 				AADAF49F1BB2FFD40048E861 /* new_location_pin.png in Resources */,
 				AACD6F181BB8DB0B0069E5D8 /* tab_bar_map_icon@3x.png in Resources */,
+				AA6B52E11BBC3B7A004167F7 /* IMAPhotoTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,7 +428,10 @@
 				AADAF49A1BB2ECA20048E861 /* ImageNearTabBarController.m in Sources */,
 				AA1DC4321B8EA6B500092B88 /* IMAMapObject.m in Sources */,
 				AADAF4951BB2EB5C0048E861 /* MapViewController.m in Sources */,
+				AA6B52DC1BBC3B2C004167F7 /* ImageNearPhotoViewController.m in Sources */,
+				AA6B52E51BBC3BA0004167F7 /* IMADescriptionTableViewCell.m in Sources */,
 				AAB37BA31B703F24005F98B3 /* CollectionViewCell.m in Sources */,
+				AA6B52E01BBC3B7A004167F7 /* IMAPhotoTableViewCell.m in Sources */,
 				AA8AC02D1B7034D0007B4D12 /* ViewController.m in Sources */,
 				AA735D211B9CD6C600B8567B /* IMACordHelper.m in Sources */,
 				AA735D1B1B9CBE8400B8567B /* IMAConstants.m in Sources */,
