@@ -18,6 +18,8 @@
 @property (nonatomic, strong) MKPointAnnotation *centerLocation;
 @property (weak, nonatomic) IBOutlet UIImageView *centerPinView;
 @property (weak, nonatomic) IBOutlet UIButton *updateLocationButtonProperties;
+@property (weak, nonatomic) IBOutlet UIButton *antipodeButtonProperties;
+
 @property (nonatomic, assign) BOOL isLocationUpdated;
 
 @end
@@ -66,6 +68,12 @@
     updateLocationLayer.shadowOpacity = 0.8f;
     updateLocationLayer.shadowRadius = 1.0f;
     updateLocationLayer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    
+    CALayer *antipodeLocationLayer = [self.antipodeButtonProperties layer];
+    antipodeLocationLayer.shadowColor = [UIColor darkGrayColor].CGColor;
+    antipodeLocationLayer.shadowOpacity = 0.8f;
+    antipodeLocationLayer.shadowRadius = 1.0f;
+    antipodeLocationLayer.shadowOffset = CGSizeMake(1.0f, 1.0f);
 }
 -(void)updateRegion
 {
@@ -76,7 +84,9 @@
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, distanceInM, distanceInM);
     [self.mapView setRegion:region animated:YES];
     
+    
 }
+
 -(void)addCurrentLocationAnnotation
 {
     IMAMapObject *currentLocation = [[IMAWebServiceModel sharedInstance] getCurrentMapLocation];
@@ -97,6 +107,17 @@
         [self.mapView addAnnotation:self.centerLocation];
     }
     self.centerLocation.coordinate = center;
+    [self.mapView setCenterCoordinate:center animated:YES];
+}
+- (IBAction)antipodeButtonPressed:(id)sender {
+    CLLocationCoordinate2D center = self.mapView.centerCoordinate;
+    [self.mapView removeAnnotation:self.currentLocation];
+    [self.mapView removeAnnotation:self.centerLocation];
+    
+    IMAMapObject *mapObject = [[IMAMapObject alloc] initWithLon:center.longitude andLat:center.latitude];
+    
+    CLLocationCoordinate2D antipode = CLLocationCoordinate2DMake(mapObject.antipodeLatitude, mapObject.antipodeLongitude);
+    [self updateCenterLocation:antipode];
 }
 - (IBAction)updateLocationButtonPressed:(id)sender {
     

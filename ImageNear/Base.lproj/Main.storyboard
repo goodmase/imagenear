@@ -135,15 +135,31 @@
                                     <action selector="updateLocationButtonPressed:" destination="eLq-RU-cGM" eventType="touchUpInside" id="Ey2-cq-Khl"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddb-Bb-7WH">
+                                <rect key="frame" x="287" y="36" width="72" height="30"/>
+                                <color key="backgroundColor" red="0.2196078431372549" green="0.55686274509803924" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="GbV-bd-B8Q"/>
+                                    <constraint firstAttribute="width" constant="72" id="boz-IW-QwW"/>
+                                </constraints>
+                                <state key="normal" title="Antipode">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="antipodeButtonPressed:" destination="eLq-RU-cGM" eventType="touchUpInside" id="eo3-8F-vtD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="nqY-lX-gK3" secondAttribute="trailing" constant="-16" id="6ZP-3s-tCx"/>
                             <constraint firstItem="nqY-lX-gK3" firstAttribute="leading" secondItem="3Ek-lq-1Lf" secondAttribute="leadingMargin" constant="-16" id="A4n-fV-6HL"/>
                             <constraint firstItem="e6N-aq-0cC" firstAttribute="centerX" secondItem="nqY-lX-gK3" secondAttribute="centerX" id="AIF-wg-zqw"/>
+                            <constraint firstItem="ddb-Bb-7WH" firstAttribute="trailing" secondItem="3Ek-lq-1Lf" secondAttribute="trailingMargin" id="Fgz-HS-ThQ"/>
                             <constraint firstItem="e6N-aq-0cC" firstAttribute="centerY" secondItem="nqY-lX-gK3" secondAttribute="centerY" id="HpG-91-tes"/>
                             <constraint firstItem="F5I-x2-QJy" firstAttribute="top" secondItem="nqY-lX-gK3" secondAttribute="bottom" id="HvN-1B-uyP"/>
                             <constraint firstItem="Sln-go-KSk" firstAttribute="centerX" secondItem="3Ek-lq-1Lf" secondAttribute="centerX" id="czt-PD-RGa"/>
+                            <constraint firstItem="ddb-Bb-7WH" firstAttribute="top" secondItem="DiL-oH-ezS" secondAttribute="bottom" constant="16" id="d9U-TF-TDp"/>
                             <constraint firstItem="nqY-lX-gK3" firstAttribute="top" secondItem="DiL-oH-ezS" secondAttribute="bottom" id="oyn-4N-t9f"/>
                             <constraint firstItem="F5I-x2-QJy" firstAttribute="top" secondItem="Sln-go-KSk" secondAttribute="bottom" constant="8" id="vhx-LI-jbD"/>
                         </constraints>
@@ -151,6 +167,7 @@
                     <tabBarItem key="tabBarItem" title="Map" image="tab_bar_map_icon.png" id="tfo-Ar-E9y"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="antipodeButtonProperties" destination="ddb-Bb-7WH" id="c2y-nU-4P4"/>
                         <outlet property="centerPinView" destination="e6N-aq-0cC" id="7eD-9i-0jz"/>
                         <outlet property="mapView" destination="nqY-lX-gK3" id="Gbc-0v-5yM"/>
                         <outlet property="updateLocationButtonProperties" destination="Sln-go-KSk" id="ti4-Tf-PZR"/>
