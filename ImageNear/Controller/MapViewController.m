@@ -79,7 +79,7 @@
 {
     IMAMapObject *currentLocation = [[IMAWebServiceModel sharedInstance] getCurrentMapLocation];
     
-    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(currentLocation.latitude, currentLocation.longitude);
+    CLLocationCoordinate2D center = currentLocation.location;
     CLLocationDistance distanceInM = [IMAWebServiceModel sharedInstance].searchSizeKM*1000;
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, distanceInM, distanceInM);
     [self.mapView setRegion:region animated:YES];
@@ -90,8 +90,7 @@
 -(void)addCurrentLocationAnnotation
 {
     IMAMapObject *currentLocation = [[IMAWebServiceModel sharedInstance] getCurrentMapLocation];
-    
-    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(currentLocation.latitude, currentLocation.longitude);
+    CLLocationCoordinate2D center = currentLocation.location;
     
     self.currentLocation = [[MKPointAnnotation alloc] init];
     self.currentLocation.coordinate = center;
@@ -115,9 +114,7 @@
     [self.mapView removeAnnotation:self.centerLocation];
     
     IMAMapObject *mapObject = [[IMAMapObject alloc] initWithLon:center.longitude andLat:center.latitude];
-    
-    CLLocationCoordinate2D antipode = CLLocationCoordinate2DMake(mapObject.antipodeLatitude, mapObject.antipodeLongitude);
-    [self updateCenterLocation:antipode];
+    [self updateCenterLocation:mapObject.antipode];
 }
 - (IBAction)updateLocationButtonPressed:(id)sender {
     

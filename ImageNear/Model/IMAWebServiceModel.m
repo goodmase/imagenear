@@ -88,11 +88,11 @@
 {
     double lon, lat;
     if (antipode) {
-        lon = mapObj.antipodeLongitude;
-        lat = mapObj.antipodeLatitude;
+        lon = mapObj.antipode.longitude;
+        lat = mapObj.antipode.latitude;
     } else{
-        lon = mapObj.longitude;
-        lat = mapObj.latitude;
+        lon = mapObj.location.longitude;
+        lat = mapObj.location.latitude;
     }
     double lon_size = [IMACordHelper lonFromKm:size atLat:lat];
     double lat_size = [IMACordHelper latFromKm:size];

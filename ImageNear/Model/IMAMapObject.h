@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
 @interface IMAMapObject : NSObject
 
 -(instancetype)initWithLon:(double)lon andLat:(double)lat;
 
-@property (nonatomic, assign) double latitude;
-@property (nonatomic, assign) double longitude;
-@property (nonatomic, assign, readonly) double antipodeLatitude;
-@property (nonatomic, assign, readonly) double antipodeLongitude;
+@property (nonatomic, assign) CLLocationCoordinate2D location;
 @property (nonatomic, assign) NSInteger panoramioZoom;
+
+-(CLLocationCoordinate2D)antipode;
 
 @end

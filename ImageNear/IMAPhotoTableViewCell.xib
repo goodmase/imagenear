@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -17,8 +17,11 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BH8-Jh-pGG">
                         <rect key="frame" x="-8" y="-8" width="336" height="189"/>
+                        <animations/>
                     </imageView>
                 </subviews>
+                <animations/>
+                <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="BH8-Jh-pGG" secondAttribute="trailing" constant="-16" id="Tso-K8-mHw"/>
                     <constraint firstItem="BH8-Jh-pGG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-16" id="mcO-lX-Tdb"/>
@@ -26,6 +29,7 @@
                     <constraint firstItem="BH8-Jh-pGG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-16" id="xM8-Sg-NyE"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="photoImageView" destination="BH8-Jh-pGG" id="S3C-Rw-Snz"/>
             </connections>

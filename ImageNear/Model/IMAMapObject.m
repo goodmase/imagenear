@@ -14,26 +14,25 @@
 {
     self = [super init];
     if (self) {
-        _longitude = lon;
-        _latitude = lat;
+        _location = CLLocationCoordinate2DMake(lat, lon);
     }
     return self;
 }
-
--(double)antipodeLatitude
+-(CLLocationCoordinate2D)antipode
 {
-    return self.latitude*-1;
-}
--(double)antipodeLongitude
-{
-    if (self.longitude < 0) {
-        return self.longitude + 180.0;
+    double lat = self.location.latitude*-1;
+    double lon = self.location.longitude;
+    if (lon < 0) {
+        lon += 180.0;
+    } else{
+        lon -= 180.0;
     }
-    return self.longitude-180.0;
+    return CLLocationCoordinate2DMake(lat, lon);
+    
 }
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"Lon %.4f Lat %.4f", self.longitude, self.latitude];
+    return [NSString stringWithFormat:@"Lon %.4f Lat %.4f", self.location.longitude, self.location.latitude];
 }
 
 @end
