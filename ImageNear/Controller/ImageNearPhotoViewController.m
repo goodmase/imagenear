@@ -17,7 +17,7 @@
 @property (nonatomic, strong) UIImage *mainImage;
 @property (nonatomic, assign) CGFloat imageCellHeight;
 @property (nonatomic, assign) CGFloat textCellHeight;
-
+@property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
 @end
 
 @implementation ImageNearPhotoViewController
@@ -39,7 +39,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"IMAPhotoTableViewCell" bundle:nil] forCellReuseIdentifier:@"photoCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"IMADescriptionTableViewCell" bundle:nil] forCellReuseIdentifier:@"descriptionCell"];
     
-    self.navigationItem.title = self.photoObject.photoTitle;
+    //self.navigationItem.title = self.photoObject.photoTitle;
     
     [[IMAWebServiceModel sharedInstance] downloadPhotoWithURL:self.photoObject.largePhotoFileURL completionHandler:^(UIImage *image, NSError *error) {
         if (!error) {
@@ -57,7 +57,7 @@
                 
                 self.imageCellHeight = height;
                 
-                
+                [self setupFileExport:image];
                 
                 [self.tableView reloadData];
             });
@@ -70,6 +70,58 @@
     [super viewWillAppear:animated];
     NSLog(@"View will appear");
 
+}
+
+-(void)setupFileExport:(UIImage *)img
+{
+    NSData *data = UIImageJPEGRepresentation(img, 0.9);
+    NSString *documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES ) objectAtIndex:0];
+    NSString *filePathImg = [documentsDirectoryPath stringByAppendingPathComponent:@"photo.jpg"];
+    
+    [data writeToFile:filePathImg atomically:YES];
+    
+    NSURL* fileURL = [NSURL fileURLWithPath:filePathImg];
+    
+    self.documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIBarButtonItem *exportButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self  action:@selector(exportPhoto:)];
+        UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(savePhoto:)];
+        self.navigationItem.rightBarButtonItems = @[exportButton, saveButton];
+    });
+    
+}
+-(void)savePhoto:(id)sender
+{
+    UIActivityViewController *activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:@[self.mainImage]
+                                      applicationActivities:nil];
+    [self.navigationController presentViewController:activityViewController
+                                            animated:YES
+                                          completion:nil];
+}
+-(void)exportPhoto:(id)sender
+{
+
+    UIBarButtonItem *barButton = (UIBarButtonItem *)sender;
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        BOOL didOpen = [self.documentInteractionController presentOpenInMenuFromBarButtonItem:barButton animated:YES];
+        if (!didOpen) {
+            [self basicAlertWithTitle:@"Error" andMsg:@"You do not seem to have any apps that support exporting photos"];
+        }
+    });
+    
+}
+-(void)basicAlertWithTitle:(NSString *)title andMsg:(NSString *)msg{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +137,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 2;
+}
+
+-(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
 }
 
 

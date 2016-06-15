@@ -29,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     self.mapView.delegate = self;
 
     
@@ -49,6 +50,8 @@
     //remove our annotation
     [self.mapView removeAnnotation:self.currentLocation];
     [self.mapView removeAnnotation:self.centerLocation];
+    self.currentLocation = nil;
+    self.centerLocation = nil;
     if (self.isLocationUpdated) {
         [self.imageCollectionView refreshImages:nil];
         self.isLocationUpdated = NO;
@@ -74,6 +77,10 @@
     antipodeLocationLayer.shadowOpacity = 0.8f;
     antipodeLocationLayer.shadowRadius = 1.0f;
     antipodeLocationLayer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+}
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 -(void)updateRegion
 {
@@ -102,16 +109,23 @@
 {
     if (!self.centerLocation) {
         self.centerLocation = [[MKPointAnnotation alloc] init];
-        self.centerLocation.title = @"New location";
+        
         [self.mapView addAnnotation:self.centerLocation];
     }
-    self.centerLocation.coordinate = center;
-    [self.mapView setCenterCoordinate:center animated:YES];
+    self.centerLocation.title = [NSString stringWithFormat:@"%.2f°, %.2f°", center.longitude, center.latitude];
+
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.centerLocation.coordinate = center;
+        [self.mapView setCenterCoordinate:center animated:YES];
+    });
+    
 }
 - (IBAction)antipodeButtonPressed:(id)sender {
     CLLocationCoordinate2D center = self.mapView.centerCoordinate;
-    [self.mapView removeAnnotation:self.currentLocation];
-    [self.mapView removeAnnotation:self.centerLocation];
+    //[self.mapView removeAnnotation:self.currentLocation];
+    //[self.mapView removeAnnotation:self.centerLocation];
+
     
     IMAMapObject *mapObject = [[IMAMapObject alloc] initWithLon:center.longitude andLat:center.latitude];
     [self updateCenterLocation:mapObject.antipode];
@@ -119,8 +133,8 @@
 - (IBAction)updateLocationButtonPressed:(id)sender {
     
     CLLocationCoordinate2D center = self.mapView.centerCoordinate;
-    [self.mapView removeAnnotation:self.currentLocation];
-    [self.mapView removeAnnotation:self.centerLocation];
+    //[self.mapView removeAnnotation:self.currentLocation];
+    //[self.mapView removeAnnotation:self.centerLocation];
     [self updateCenterLocation:center];
     
     [[IMAWebServiceModel sharedInstance] setNewLon:center.longitude andLat:center.latitude];

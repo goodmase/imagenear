@@ -9,6 +9,7 @@
 #import "ImageViewController.h"
 #import "IMAPhotoObject.h"
 #import "IMAWebServiceModel.h"
+#import <Haneke.h>
 
 @interface ImageViewController ()
 @property (nonatomic, weak) IBOutlet UIImageView *fullScreenImageView;
@@ -35,7 +36,8 @@
     NSLog(@"View will appear");
     
     self.navigationItem.title = self.photoObject.photoTitle;
-    
+    [self.fullScreenImageView hnk_setImageFromURL:self.photoObject.largePhotoFileURL];
+    /*
     [[IMAWebServiceModel sharedInstance] downloadPhotoWithURL:self.photoObject.largePhotoFileURL completionHandler:^(UIImage *image, NSError *error) {
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -43,6 +45,7 @@
             });
         }
     }];
+     */
 }
 
 - (void)didReceiveMemoryWarning {
