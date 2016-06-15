@@ -37,7 +37,7 @@
     self.updateAttempts = 1;
     
     [self setupRefreshControl];
-    //[self downloadTheData];
+    [self downloadTheData];
     
 }
 -(void)setupRefreshControl
